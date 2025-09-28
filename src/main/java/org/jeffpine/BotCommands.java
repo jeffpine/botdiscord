@@ -20,9 +20,9 @@ public class BotCommands extends ListenerAdapter {
                     event.getChannel().sendMessage("Use `/roll d20`, `/roll 2d6+3`, `/roll d20 adv`, etc.").queue();
                 } else if (args.length == 2) {
                     if (args[1].equalsIgnoreCase("adv")) {
-                        event.getChannel().sendMessage(DiceRoller.rollAdvantage()).queue();
+                        event.getChannel().sendMessage(DiceRoller.rollAdvantage(0)).queue();
                     } else if (args[1].equalsIgnoreCase("dis")) {
-                        event.getChannel().sendMessage(DiceRoller.rollDisadvantage()).queue();
+                        event.getChannel().sendMessage(DiceRoller.rollDisadvantage(0)).queue();
                     } else {
                         event.getChannel().sendMessage(DiceRoller.roll(args[1])).queue();
                     }

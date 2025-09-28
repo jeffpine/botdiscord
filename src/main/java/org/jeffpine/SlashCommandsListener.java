@@ -12,13 +12,13 @@ public class SlashCommandsListener extends ListenerAdapter {
                 String input = event.getOption("expressao").getAsString();
 
                 if (input.equalsIgnoreCase("adv")) {
-                    event.reply(DiceRoller.rollAdvantage()).queue();
+                    event.reply(DiceRoller.rollAdvantage(0)).queue();
                 } else if (input.equalsIgnoreCase("dis")) {
-                    event.reply(DiceRoller.rollDisadvantage()).queue();
+                    event.reply(DiceRoller.rollDisadvantage(0)).queue();
                 } else if (input.toLowerCase().contains("adv")) {
-                    event.reply(DiceRoller.rollAdvantage()).queue();
+                    event.reply(DiceRoller.rollAdvantage(0)).queue();
                 } else if (input.toLowerCase().contains("dis")) {
-                    event.reply(DiceRoller.rollDisadvantage()).queue();
+                    event.reply(DiceRoller.rollDisadvantage(0)).queue();
                 } else {
                     event.reply(DiceRoller.roll(input)).queue();
                 }

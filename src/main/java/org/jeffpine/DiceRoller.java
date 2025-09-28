@@ -26,12 +26,14 @@ public class DiceRoller {
         int bonus = 0;
 
         try {
+            // quantidade de dados
             if (parts[0].isEmpty()) {
                 quantity = 1;
             } else {
                 quantity = Integer.parseInt(parts[0]);
             }
 
+            // lados e bônus
             String second = parts[1];
             if (second.contains("+")) {
                 String[] temp = second.split("\\+");
@@ -41,22 +43,47 @@ public class DiceRoller {
                 sides = Integer.parseInt(second);
             }
 
-            int result = rollDice(quantity, sides) + bonus;
-            return "🎲 Resultado de `" + input + "`: **" + result + "**";
+            // rolar os dados
+            StringBuilder rolls = new StringBuilder();
+            int sum = 0;
+            for (int i = 0; i < quantity; i++) {
+                int roll = rollDie(sides);
+                sum += roll;
+                rolls.append(roll);
+                if (i < quantity - 1) rolls.append(", ");
+            }
+
+            int total = sum + bonus;
+
+            return "🎲 Rolagem de `" + input + "`:\n" +
+                    "Dados: [" + rolls + "] → soma = " + sum + "\n" +
+                    (bonus != 0 ? "Bônus: +" + bonus + "\n" : "") +
+                    "**Total = " + total + "**";
+
         } catch (Exception e) {
-            return "❌ Comando inválido. Tente algo como `/roll 2d6+3`.";
+            return "❌ Comando inválido. Tente algo como `/roll 2d6+3`";
         }
     }
 
-    public static String rollAdvantage() {
+    public static String rollAdvantage(int bonus) {
         int first = rollDie(20);
         int second = rollDie(20);
-        return "🎲 Vantagem: `" + first + "` vs `" + second + "` → **" + Math.max(first, second) + "**";
+        int winner = Math.max(first, second);
+
+        int total = winner + bonus;
+
+        return "🎲 Vantagem: [" + first + "] vs [" + second + "] → ✅ " + winner +
+                (bonus != 0 ? " + bônus(" + bonus + ") = **" + total + "**" : "");
     }
 
-    public static String rollDisadvantage() {
+    public static String rollDisadvantage(int bonus) {
         int first = rollDie(20);
         int second = rollDie(20);
-        return "🎲 Desvantagem: `" + first + "` vs `" + second + "` → **" + Math.min(first, second) + "**";
+        int loser = Math.min(first, second);
+
+        int total = loser + bonus;
+
+        return "🎲 Desvantagem: [" + first + "] vs [" + second + "] → ❌ " + loser +
+                (bonus != 0 ? " + bônus(" + bonus + ") = **" + total + "**" : "");
     }
 }
