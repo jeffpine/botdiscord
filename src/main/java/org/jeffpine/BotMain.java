@@ -1,5 +1,6 @@
 package org.jeffpine;
 
+import io.github.cdimascio.dotenv.Dotenv;
 import net.dv8tion.jda.api.JDABuilder;
 import net.dv8tion.jda.api.entities.Activity;
 import net.dv8tion.jda.api.interactions.commands.OptionType;
@@ -11,10 +12,8 @@ import javax.security.auth.login.LoginException;
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 public class BotMain {
     public static void main(String[] args) throws LoginException {
-        String token = System.getenv("DISCORD_TOKEN"); // busca do ambiente
-        if (token == null) {
-            throw new IllegalStateException("O token do Discord não foi encontrado. Defina a variável DISCORD_TOKEN.");
-        }
+        Dotenv dotenv = Dotenv.load();
+        String token = dotenv.get("DISCORD_TOKEN");
 
         var jda = JDABuilder.createDefault(token)
                 .setActivity(Activity.playing("https://github.com/jeffpine"))
