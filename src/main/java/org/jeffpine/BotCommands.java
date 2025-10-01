@@ -29,6 +29,7 @@ public class BotCommands extends ListenerAdapter {
                 } else {
                     event.getChannel().sendMessage("❌ Sintaxe inválida.").queue();
                 }
+
                 break;
 
             case "ajuda":

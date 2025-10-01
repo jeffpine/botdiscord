@@ -27,7 +27,10 @@ public class SlashCommandsListener extends ListenerAdapter {
             case "ajuda" -> {
                 event.reply("""
                         📘 **Comandos disponíveis:**
-                        `/roll [expressão]` → Rola dados (ex: d20, 2d6+3, d20 adv, d20 dis)
+                        `/roll [expressão]` → Rola dados (ex: d20, 2d6+3, adv+5, dis+2)
+                        - `adv` ou `advantage` → Vantagem no d20
+                        - `dis` ou `disadvantage` → Desvantagem no d20
+                        - Adicione `+X` ou `-X` para bônus/penalidade (ex: `adv+5`, `dis-2`)
                         `/ajuda` → Mostra esta lista
                         """).setEphemeral(true).queue();
             }
