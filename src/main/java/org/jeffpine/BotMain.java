@@ -11,7 +11,12 @@ import javax.security.auth.login.LoginException;
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 public class BotMain {
     public static void main(String[] args) throws LoginException {
-        var jda = JDABuilder.createDefault("MTM5NjE3Mjg3MDc0MDIxNzkwOA.Gne6-N.zVsx1tWj_R8B9a11GrsEIDeIqhN1YetmvZMlQA")
+        String token = System.getenv("DISCORD_TOKEN"); // busca do ambiente
+        if (token == null) {
+            throw new IllegalStateException("O token do Discord não foi encontrado. Defina a variável DISCORD_TOKEN.");
+        }
+
+        var jda = JDABuilder.createDefault(token)
                 .setActivity(Activity.playing("https://github.com/jeffpine"))
                 .addEventListeners(new SlashCommandsListener())
                 .build();
